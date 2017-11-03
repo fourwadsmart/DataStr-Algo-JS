@@ -1,0 +1,1 @@
+I'm reading Data Structure and Algorithms with JavaScript book. I created this repository to push my exercise codes. If you are reading the book or you just would like to contribute, please feel free to fork this project.
