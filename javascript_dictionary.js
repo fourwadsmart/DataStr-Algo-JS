@@ -1,4 +1,7 @@
-/* Javascript dictionary data structure */
+/* ==============================================
+        Javascript dictionary data structure
+   ============================================== */
+
 
 function Dictionary() {
     this.datastore = [];
@@ -36,7 +39,6 @@ function showAll() {
         console.log(key + ' -> ' + this.datastore[key]);
     }
 }
-
 
 
 
