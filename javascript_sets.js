@@ -10,7 +10,7 @@ function Set() {
     this.union = union;
     this.intersect = intersect;
     this.subset = subset;
-    //this.difference = difference;
+    this.difference = difference;
     this.show = show;
     this.contains = contains;
     
@@ -106,8 +106,17 @@ function subset(set) {
 }
 
 
-
 function size() {
     return this.dataStore.length;
 }
 
+
+function difference(set) {
+    let tempSet = new Set();
+    for(let i 0; i < this.dataStore.length; i++) {
+        if (!set.contains(this.dataStore[i])) {
+            tempSet.add(this.dataStore[i]);
+        }
+    }
+    return tempSet;
+}
