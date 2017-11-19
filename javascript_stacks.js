@@ -1,4 +1,6 @@
-/** Stack Data Structure **/
+/* ==============================================
+                Stack data structure
+   ============================================== */
 
 function Stack() {
     this.dataStore = [];
