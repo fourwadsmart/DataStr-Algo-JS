@@ -105,7 +105,10 @@ function bfs(s) {
 
 
 
-// findest shortest path function
+/**
+     Determine paths
+**/
+
 function pathTo(v) {
     let source = 0;
     if (!this.hasPathTo(v)) {
@@ -124,5 +127,38 @@ function hasPathTo(v) {
     return this.marked[v];
 }
 
+
+/**
+    Topological Sorting
+**/
+
+function topSort() {
+    let stack = [];
+    let visited = [];
+    for (let i = 0; i < this.vertices; i++) {
+        visited[i] = false;
+    }
+    for (let i = 0; i < this.vertices; i++) {
+        if (visited[i] == false) {
+            this.topSortHelper(i, visited, stack);
+        }
+    }
+    for (let i = 0; i < stack.length; i++) {
+        if (stack[i] != undefined && stack[i] != false) {
+            console.log(this.vertexList[stack[i]]);
+        }
+    }
+    
+}
+
+function topSortHelper(v, visited, stack) {
+    visited[v] = true;
+    for (let w in this.adj[v]) {
+        if (!visited[w]) {
+            this.topSortHelper(visited[w], visited, stack);
+        }
+    }
+    stack.push(v);
+}
 
 
