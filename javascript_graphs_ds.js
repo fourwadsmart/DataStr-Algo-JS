@@ -34,6 +34,9 @@ function Graph(v) {
     this.pathTo = pathTo;
     this.hasPathTo = hasPathTo;
     
+    this.topSortHelper = topSortHelper;
+    this.topSort = topSort;
+
 }
 
 
