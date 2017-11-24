@@ -14,15 +14,25 @@ function CArray(numElements) {
     this.clear = clear;
     this.setData = setData;
     this.swap = swap;
+    // basic sorting algorithm
     this.bubbleSort = bubbleSort;
     this.selectionSort = selectionSort;
     this.insertionSort = insertionSort;
+    // advanced sorting algorithm
+    this.shellSort = sellSort;
+    this.dynShellSort = dynShellSort;
+    this.setGaps = setGaps;
     
+    this.gaps = [5, 3, 1];
+    
+    // store some data to the object
     for (let i = 0; i < numElements; i++) {
         this.dataStore[i] = i;
     }
     
 }
+
+
 
 function setData() {
     for (let i = 0; i < this.numElements; i++) {
@@ -116,8 +126,6 @@ function insertionSort() {
 }
 
 
-
-
 /********************************************************************/
 /* Snippet of code to test the runtime of the three algorithm above */
 
@@ -147,9 +155,81 @@ numElements + " elements is: " + elapsed + " milliseconds.");
 
 
 
+/******************* Advanced Sorting Algorithms ********************/
+
+
 /**
-    Insertion Sort in action **
+    Shell Sort in action **
 **/
+
+
+function setGaps(arr) {
+    this.gaps = arr;
+}
+
+
+
+function sellSort() {
+    
+    let j; // make j available outside the for loop block scope
+    
+    for (let g = 0; g < this.gaps.length; g++) {
+        
+        for (let i = this.gaps[g]; i < this.dataStore.length; i++) {
+            
+            let temp = this.dataStore[i];
+            
+            for (j = i; j >= this.gaps[g] && this.dataStore[j-this.gaps[g]] > temp; j -= this.gaps[g]) {
+                this.dataStore[j] = this.dataStore[j - this.gaps[g]];
+            }
+            this.dataStore[j] = temp;
+        }
+    }
+}
+
+
+
+/**
+    Shell Sort with a dynamically computed gap sequence **
+**/
+
+function dynShellSort() {
+    let N = this.dataStore.length;
+    let h = 1;
+    while (h < N/3) {
+        h = 3 * h + 1;
+    }
+    
+    while(h >= 1) {
+        for (let i = h; i < N; i++) {
+            for (let j = i; j >= h && this.dataStore[j] < this.dataStore[j-h]; j -= h) {
+                swap(this.dataStore, j, j-h);
+            }
+        }
+        
+        h = (h-1)/3;
+    }
+}
+
+
+
+/*******************************************************************************/
+/* Snippet of code to test the runtime of the two shellSort a algorithms above */
+
+
+var nums = new CArray(10000);
+nums.setData();
+var start = new Date().getTime();
+nums.shellSort();
+var stop = new Date().getTime();
+var elapsed = stop - start;
+console.log("Shellsort with hard-coded gap sequence: " + elapsed + " ms.");
+nums.clear();
+nums.setData();
+start = new Date().getTime();
+nums.dynShellSort();
+stop = new Date().getTime();
+console.log("Shellsort with dynamic gap sequence: " + elapsed + " ms.");
 
 
 
