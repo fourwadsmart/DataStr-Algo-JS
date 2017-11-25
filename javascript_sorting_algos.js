@@ -128,6 +128,7 @@ function insertionSort() {
 
 /********************************************************************/
 /* Snippet of code to test the runtime of the three algorithm above */
+/********************************************************************/
 
 var numElements = 100;
 var nums = new CArray(numElements);
@@ -215,7 +216,7 @@ function dynShellSort() {
 
 /*******************************************************************************/
 /* Snippet of code to test the runtime of the two shellSort a algorithms above */
-
+/*******************************************************************************/
 
 var nums = new CArray(10000);
 nums.setData();
@@ -230,6 +231,72 @@ start = new Date().getTime();
 nums.dynShellSort();
 stop = new Date().getTime();
 console.log("Shellsort with dynamic gap sequence: " + elapsed + " ms.");
+
+
+/**
+    Merge Sort in action **
+**/
+
+
+function mergeSort(arr) {
+    if (arr.length < 2) {
+        return;
+    }
+    let step = 1;
+    let left, right;
+    while (step < arr.length) {
+        left = 0;
+        right = step;
+        while (right + step <= arr.length) {
+            mergeArrays(arr, left, left+step, right+step);
+            left = right + step;
+            right = left + step;
+        }
+        if (right < arr.length) {
+            mergeArrays(arr, left, left + step, right, arr.length);
+        }
+        step *= 2;
+    }
+}
+
+function mergeArrays(arr, startLeft, stopLeft, startRight, stopRight) {
+    let rightArr = new Array(stopRight - startRight + 1);
+    let leftArr = new Array(stopLeft - startLeft + 1);
+    
+    let k = startRight;
+    
+    for (let i = 0; i < (rightArr.length-1); i++) {
+        k++;
+    }
+    
+    k = startLeft;
+    
+    for (let i = 0; i < (leftArr.length-1); i++) {
+        leftArr[i] = arr[k];
+        k++;
+    }
+    
+    rightArr[rightArr.length-1] = Infinity; // a sentinel value
+    leftArr[leftArr.length-1] = Infinity; // a sentinel value
+    let m = 0;
+    let n = 0;
+    
+    for (let k = startLeft; k < stopRight; k++) {
+        if (leftArr[m] <= rightArr[n]) {
+            arr[k] = leftArr[m];
+            m++;
+        }
+        else {
+            arr[k] = rightArr[n];
+            n++;
+        }
+    }
+    console.log("left array - ", leftArr);
+    console.log("right array - ", rightArr);
+}
+
+
+
 
 
 
