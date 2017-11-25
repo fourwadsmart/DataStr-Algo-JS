@@ -18,12 +18,17 @@ function CArray(numElements) {
     this.bubbleSort = bubbleSort;
     this.selectionSort = selectionSort;
     this.insertionSort = insertionSort;
+    
     // advanced sorting algorithm
     this.shellSort = sellSort;
     this.dynShellSort = dynShellSort;
-    this.setGaps = setGaps;
-    
+    this.setGaps = setGaps; 
     this.gaps = [5, 3, 1];
+    // mergesort algorithm
+    this.mergeSort = mergeSort;
+    this.mergeArrays = mergeArrays;
+    // quicksort algorithm
+    this.quickSort = quickSort;
     
     // store some data to the object
     for (let i = 0; i < numElements; i++) {
@@ -170,7 +175,7 @@ function setGaps(arr) {
 
 
 
-function sellSort() {
+function shellSort() {
     
     let j; // make j available outside the for loop block scope
     
@@ -259,6 +264,9 @@ function mergeSort(arr) {
     }
 }
 
+
+
+
 function mergeArrays(arr, startLeft, stopLeft, startRight, stopRight) {
     let rightArr = new Array(stopRight - startRight + 1);
     let leftArr = new Array(stopLeft - startLeft + 1);
@@ -297,6 +305,27 @@ function mergeArrays(arr, startLeft, stopLeft, startRight, stopRight) {
 
 
 
+/**
+    Quick Sort in action **
+**/
+function quickSort() {
+    if (list.length == 0) {
+        return [];
+    }
+    let lesser = [];
+    let greater = [];
+    let pivot = list[0];
+    
+    for(let i = 1; i < list.length; i++) {
+        if (list[i] < pivot) {
+            lesser.push(list[i]);
+        }
+        else {
+            greater.push(list[i]);
+        }
+        
+    }
+    return quickSort(lesser).concat(pivot, quickSort(greater));
+}
 
-
-
+ 
